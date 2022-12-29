@@ -1,12 +1,12 @@
-import {View} from 'react-native';
 import React from 'react';
 import Topo from './components/Topo';
+import Produtores from './components/Produtores';
 
 const Home = () => {
   return (
-    <View>
-      <Topo />
-    </View>
+    <>
+      <Produtores header={Topo} />
+    </>
   );
 };
 
