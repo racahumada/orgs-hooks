@@ -1,23 +1,11 @@
-import {View, Text, FlatList} from 'react-native';
-import React, {useEffect, useState} from 'react';
+import {Text, FlatList} from 'react-native';
+import React from 'react';
 import {styles} from './styles';
-
-import {carregaProdutores} from '../../../../services/loadData';
 import Card from '../Card';
+import useProdutores from '../../../../hooks /useProdutores';
 
 const Produtores = ({header: Header}) => {
-  const [titulo, setTitulo] = useState('');
-  const [listaProdutores, setListaProdutores] = useState([]);
-
-  const atualizaProdutores = () => {
-    const res = carregaProdutores();
-    setTitulo(res.titulo);
-    setListaProdutores(res.lista);
-  };
-
-  useEffect(() => {
-    atualizaProdutores();
-  }, []);
+  const [titulo, listaProdutores] = useProdutores();
 
   const TopoLista = () => {
     return (

@@ -1,15 +1,24 @@
 import {View, Text, Image, TouchableOpacity} from 'react-native';
-import React, {useState} from 'react';
+import React, {useMemo, useReducer} from 'react';
 import {styles} from './styles';
 import Estrelas from '../../../../componentes/Estrelas';
 
+const distanciaEmMetros = distancia => {
+  return `${distancia}m`;
+};
+
 const Card = ({nome, imagem, distancia, estrelas}) => {
-  const [selecionado, setSelecionado] = useState(false);
+  const [selecionado, selecionadoDispatch] = useReducer(state => {
+    return !state;
+  }, false);
+
+  const distanciaTexto = useMemo(() => {
+    console.log('distancia memo');
+    distanciaEmMetros(distancia);
+  }, [distancia]);
 
   return (
-    <TouchableOpacity
-      onPress={() => setSelecionado(!selecionado)}
-      style={styles.container}>
+    <TouchableOpacity onPress={selecionadoDispatch} style={styles.container}>
       <Image source={imagem} accessibilityLabel={nome} style={styles.imagem} />
       <View style={styles.info}>
         <View>
@@ -20,7 +29,7 @@ const Card = ({nome, imagem, distancia, estrelas}) => {
             grande={selecionado}
           />
         </View>
-        <Text style={styles.distancia}>{distancia}</Text>
+        <Text style={styles.distancia}>{distanciaTexto}</Text>
       </View>
     </TouchableOpacity>
   );
