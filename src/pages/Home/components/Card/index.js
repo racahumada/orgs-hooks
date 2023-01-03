@@ -14,7 +14,7 @@ const Card = ({nome, imagem, distancia, estrelas}) => {
 
   const distanciaTexto = useMemo(() => {
     console.log('distancia memo');
-    distanciaEmMetros(distancia);
+    return distanciaEmMetros(distancia);
   }, [distancia]);
 
   return (
